@@ -1,0 +1,11 @@
+# IDE
+/.idea
+/pimple.json
+
+# composer
+/vendor
+
+# logs
+/log
+
+
