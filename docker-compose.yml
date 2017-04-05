@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile.dev
+    ports:
+    - '80:80'
+    volumes:
+    - .:/var/www/html
+    - ./log:/var/log/nginx
+    links:
+    - fpm
+  fpm:
+    build:
+      context: ./docker/fpm
+      dockerfile: Dockerfile.dev
+    volumes:
+    - .:/var/www/html
+    - ./log:/var/log/php-fpm
+    - /tmp:/tmp

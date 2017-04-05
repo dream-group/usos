@@ -1,0 +1,6 @@
+# This is a production docker file, paths are relative to the project root
+
+FROM php:7.1-fpm-alpine
+
+COPY app                    /var/www/html/app
+COPY vendor                 /var/www/html/vendor
