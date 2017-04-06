@@ -50,7 +50,7 @@ class App extends Application
     private function registerControllers()
     {
         $controllers = [
-            'controller.api.applicants'         => ApplicantsController::class,
+            'controller.api.applicants'     => ApplicantsController::class,
             'controller.unknown_requests'   => UnknownRequestsController::class,
         ];
 
