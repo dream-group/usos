@@ -3,6 +3,7 @@
 namespace Dream\USOS;
 
 use Dream\USOS\Controllers\ApplicantsController;
+use Dream\USOS\Controllers\UnknownRequestsController;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -27,7 +28,8 @@ class App extends Application
 
     private function registerPaths()
     {
-        $this['path.base'] = dirname(__DIR__);
+        $this['path.base'] = dirname(dirname(__DIR__));
+        $this['path.data'] = $this['path.base'] . '/data';
     }
 
     private function registerProviders()
@@ -48,7 +50,8 @@ class App extends Application
     private function registerControllers()
     {
         $controllers = [
-            'controller.api.applicants' => ApplicantsController::class,
+            'controller.api.applicants'         => ApplicantsController::class,
+            'controller.unknown_requests'   => UnknownRequestsController::class,
         ];
 
         foreach ($controllers as $name => $class) {
@@ -77,5 +80,8 @@ class App extends Application
                 return ob_get_clean();
             });
         }
+
+        // catch all for debug
+        $this->match('/{params}', 'controller.unknown_requests')->assert('params', '.*');
     }
 }
