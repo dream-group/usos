@@ -4,6 +4,7 @@ namespace Dream\USOS;
 
 use Dream\USOS\Controllers\ApplicantsController;
 use Dream\USOS\Controllers\UnknownRequestsController;
+use Dream\USOS\Debug\DumpRequest;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -44,7 +45,9 @@ class App extends Application
 
     private function registerServices()
     {
-
+        $this['debug.dump_request'] = function () {
+            return new DumpRequest($this['path.data']);
+        };
     }
 
     private function registerControllers()

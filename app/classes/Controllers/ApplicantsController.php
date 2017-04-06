@@ -9,6 +9,8 @@ class ApplicantsController extends Controller
 {
     public function get(Request $request)
     {
+        $this->app['debug.dump_request']->dumpRequest();
+
         $email = $request->get('email', 'jmd@mimuw.edu.pl');
 
         $sampleData = array (
