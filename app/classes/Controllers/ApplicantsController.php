@@ -114,6 +114,16 @@ class ApplicantsController extends Controller
             'cas_password_overwrite' => false,
         );
 
-        return new JsonResponse($sampleData);
+        $request = [
+            'count' => 1,
+            'next' => null,
+            'previous' => null,
+            'results' => [
+                $sampleData
+            ]
+        ];
+
+
+        return new JsonResponse($request);
     }
 }
