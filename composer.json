@@ -5,7 +5,11 @@
             "Dream\\USOS\\": "app/classes"
         }
     },
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/dream-group/dream-apply-sdk"}
+    ],
     "require": {
+        "dream-group/dream-apply-sdk": "dev-master",
         "silex/silex": "^2.0",
 
         "php": ">= 7.1"
