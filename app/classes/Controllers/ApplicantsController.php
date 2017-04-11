@@ -16,7 +16,7 @@ class ApplicantsController extends Controller
 
         $client = $this->app['factory.dreamapply.api']($host, $request);
 
-        $email = $request->get('email', 'jmd@mimuw.edu.pl');
+        $email = $request->get('email', 'jmd@mimuw.edu.pl'); // TODO: remove default, throw exception if no email
 
         $applicants = $client->applicants->filter()->toArray();
 
