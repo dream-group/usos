@@ -2,8 +2,9 @@
 
 namespace Dream\USOS;
 
+use Dream\USOS\Api\DreamApplyApiFactory;
 use Dream\USOS\Controllers\ApplicantsController;
-use Dream\USOS\Controllers\UnknownRequestsController;
+use Dream\USOS\Controllers\ErrorController;
 use Dream\USOS\Debug\DumpRequest;
 use Silex\Application;
 use Silex\ControllerCollection;
@@ -45,6 +46,10 @@ class App extends Application
 
     private function registerServices()
     {
+        $this['factory.dreamapply.api'] = function () {
+            return new DreamApplyApiFactory();
+        };
+
         $this['debug.dump_request'] = function () {
             return new DumpRequest($this['path.data']);
         };
@@ -54,7 +59,7 @@ class App extends Application
     {
         $controllers = [
             'controller.api.applicants'     => ApplicantsController::class,
-            'controller.unknown_requests'   => UnknownRequestsController::class,
+            'controller.error'              => ErrorController::class,
         ];
 
         foreach ($controllers as $name => $class) {
@@ -66,16 +71,6 @@ class App extends Application
 
     private function registerRoutes()
     {
-        $this->get('/', function () {
-            return 'Workz!';
-        });
-
-        $this->mount('/api', function (ControllerCollection $api) {
-            $api->mount('/applicants', function (ControllerCollection $applicants) {
-                $applicants->get('/', 'controller.api.applicants:get');
-            });
-        });
-
         if ($this['debug']) {
             $this->get('/info', function () {
                 ob_start();
@@ -84,7 +79,14 @@ class App extends Application
             });
         }
 
-        // catch all for debug
-        $this->match('/{params}', 'controller.unknown_requests')->assert('params', '.*');
+        $this->mount('/{host}', function (ControllerCollection $host) {
+            $host->mount('/api', function (ControllerCollection $api) {
+                $api->mount('/applicants', function (ControllerCollection $applicants) {
+                    $applicants->get('/', 'controller.api.applicants:get');
+                });
+            });
+        });
+
+        $this->error($this['controller.error']);
     }
 }

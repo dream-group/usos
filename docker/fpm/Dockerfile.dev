@@ -1,3 +1,10 @@
 FROM php:7.1-fpm-alpine
 
+RUN apk --no-cache add icu
+
+RUN \
+    apk --no-cache add icu-dev && \
+    docker-php-ext-install intl && \
+    apk del icu-dev
+
 ENV APP_ENV=development

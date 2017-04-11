@@ -2,5 +2,12 @@
 
 FROM php:7.1-fpm-alpine
 
+RUN apk --no-cache add icu
+
+RUN \
+    apk --no-cache add icu-dev && \
+    docker-php-ext-install intl && \
+    apk del icu-dev
+
 COPY app                    /var/www/html/app
 COPY vendor                 /var/www/html/vendor
