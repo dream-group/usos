@@ -3,12 +3,13 @@
 namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Models\Applicant;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{
+    JsonResponse, Request, Response
+};
 
 class ApplicantsController extends Controller
 {
-    public function get(Request $request, string $host)
+    public function get(Request $request, string $host): Response
     {
         if ($this->app['debug']) {
             $this->app['debug.dump_request']->dumpRequest();

@@ -4,12 +4,13 @@ namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\USOS\Exceptions\ServiceException;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{
+    JsonResponse, Request, Response
+};
 
 class ErrorController extends Controller
 {
-    public function __invoke(\Exception $exception, Request $request, $code)
+    public function __invoke(\Exception $exception, Request $request, $code): Response
     {
         $response = [
             'error' => true,

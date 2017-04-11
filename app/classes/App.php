@@ -28,13 +28,13 @@ class App extends Application
         $this->registerRoutes();
     }
 
-    private function registerPaths()
+    private function registerPaths(): void
     {
         $this['path.base'] = dirname(dirname(__DIR__));
         $this['path.data'] = $this['path.base'] . '/data';
     }
 
-    private function registerProviders()
+    private function registerProviders(): void
     {
         $this->register(new ServiceControllerServiceProvider());
 
@@ -44,7 +44,7 @@ class App extends Application
         }
     }
 
-    private function registerServices()
+    private function registerServices(): void
     {
         $this['factory.dreamapply.api'] = function () {
             return new DreamApplyApiFactory();
@@ -55,7 +55,7 @@ class App extends Application
         };
     }
 
-    private function registerControllers()
+    private function registerControllers(): void
     {
         $controllers = [
             'controller.api.applicants'     => ApplicantsController::class,
@@ -69,7 +69,7 @@ class App extends Application
         }
     }
 
-    private function registerRoutes()
+    private function registerRoutes(): void
     {
         if ($this['debug']) {
             $this->get('/info', function () {
