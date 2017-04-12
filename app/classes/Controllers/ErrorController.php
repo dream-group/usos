@@ -9,37 +9,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ErrorController extends Controller
 {
-    public function __invoke(\Exception $exception, Request $request, $code): Response
+    public function __invoke(\Exception $exception, Request $request, int $code): Response
     {
         $response = [
-            'error' => true,
+            'error'     => true,
+            'message'   => Response::$statusTexts[$code] ?? 'Unknown error'
         ];
-
-        $headers = [];
-
-        if ($code % 100 === 5) {
-            $response['message'] = 'Internal server error';
-        }
-
-        if ($code === 404) {
-            $response['message'] = 'Resource not found';
-        }
-
-        if ($code === 400) {
-            $response['message'] = 'Invalid request';
-        }
 
         if ($exception instanceof ServiceException || // this service exception
             $exception instanceof HttpFailResponseException) { // Dream SDK exception
             $response['message'] = $exception->getMessage();
 
-            $headers['X-Status-Code'] = $exception->getCode();
+            $code = $exception->getCode();
         }
 
         if ($this->app['debug']) {
             $response['exception'] = strval($exception);
         }
 
-        return $this->app->json($response, 500 /* ignored in error handler */, $headers);
+        return $this->app->json($response, $code);
     }
 }
