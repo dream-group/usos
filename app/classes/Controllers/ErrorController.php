@@ -4,9 +4,8 @@ namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\USOS\Exceptions\ServiceException;
-use Symfony\Component\HttpFoundation\{
-    JsonResponse, Request, Response
-};
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ErrorController extends Controller
 {
@@ -41,6 +40,6 @@ class ErrorController extends Controller
             $response['exception'] = strval($exception);
         }
 
-        return new JsonResponse($response, 500 /* ignored in error handler */, $headers);
+        return $this->app->json($response, 500 /* ignored in error handler */, $headers);
     }
 }

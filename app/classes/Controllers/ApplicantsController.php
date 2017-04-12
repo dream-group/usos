@@ -3,9 +3,8 @@
 namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Models\Applicant;
-use Symfony\Component\HttpFoundation\{
-    JsonResponse, Request, Response
-};
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApplicantsController extends Controller
 {
@@ -45,6 +44,6 @@ class ApplicantsController extends Controller
         ];
 
 
-        return new JsonResponse($request);
+        return $this->app->json($request);
     }
 }
