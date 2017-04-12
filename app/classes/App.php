@@ -82,7 +82,8 @@ class App extends Application
         $this->mount('/{host}', function (ControllerCollection $host) {
             $host->mount('/api', function (ControllerCollection $api) {
                 $api->mount('/applicants', function (ControllerCollection $applicants) {
-                    $applicants->get('/', 'controller.api.applicants:get');
+                    $applicants->get('/', 'controller.api.applicants:index');
+                    $applicants->get('{applicantId}/', 'controller.api.applicants:show')->assert('applicantId', '\d+');
                 });
             });
         });
