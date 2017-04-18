@@ -87,6 +87,17 @@ class IRKUser implements \JsonSerializable
 
             $data['contact_data'] = $contactData;
 
+            // additional_data
+
+            $additionalData = [];
+
+            if (isset($profile['passport'])) {
+                $additionalData['document_type']        = 'P';
+                $additionalData['document_number']      = $profile['passport']['number'];
+                $additionalData['document_exp_date']    = $profile['passport']['expiry'];
+                $additionalData['document_country']     = $profile['citizenship'];
+            }
+
             $data['modification_data'] = $application->revised; // again, in root
         }
 
