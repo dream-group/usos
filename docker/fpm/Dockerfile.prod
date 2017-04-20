@@ -11,3 +11,4 @@ RUN \
 
 COPY app                    /var/www/html/app
 COPY vendor                 /var/www/html/vendor
+COPY public                 /var/www/html/public
