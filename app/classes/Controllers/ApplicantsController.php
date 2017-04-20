@@ -22,11 +22,7 @@ class ApplicantsController extends Controller
         $email = $request->get('email', 'jmd@mimuw.edu.pl'); // TODO: remove default, throw exception if no email
         // TODO: also filters by PESEL(?) and Surname
 
-        $applicants = $client->applicants->filter()->toArray();
-
-        $applicants = array_filter($applicants, function (Applicant $applicant) use ($email) {
-            return $applicant->email === $email;
-        });
+        $applicants = $client->applicants(['byEmails' => $email]);
 
         $users = [];
 
