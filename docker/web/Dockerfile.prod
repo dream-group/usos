@@ -3,4 +3,3 @@
 FROM nginx:alpine
 
 COPY docker/web/root.prod /
-COPY app/public/static /var/www/html/app/public/static
