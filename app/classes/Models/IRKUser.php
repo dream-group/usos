@@ -113,7 +113,20 @@ class IRKUser implements \JsonSerializable
                 $additionalData['document_type']        = 'P';
                 $additionalData['document_number']      = $profile['passport']['number'];
                 $additionalData['document_exp_date']    = $profile['passport']['expiry'];
-                $additionalData['document_country']     = $profile['citizenship'];
+                $additionalData['document_country']     = $profile['passport']['country'];
+            } elseif (isset($profile['idcard'])) {
+                $additionalData['document_type']        = 'C';
+                $additionalData['document_number']      = $profile['idcard']['number'];
+                $additionalData['document_exp_date']    = $profile['idcard']['expiry'];
+                $additionalData['document_country']     = $profile['idcard']['country'];
+            }
+
+            if (isset($profile['birth']['place'])) {
+                $additionalData['city_of_birth'] = $profile['birth']['place'];
+            }
+
+            if (isset($profile['birth']['country'])) {
+                $additionalData['country_of_birth'] = $profile['birth']['country'];
             }
 
             $data['modification_data'] = $application->revised; // again, in root
