@@ -53,7 +53,9 @@ class IRKUser implements \JsonSerializable
                 $basicData['date_of_birth'] = $profile['birth']['date'];
             }
 
-            // todo: pesel if possible
+            if (isset($profile['nationalidcode']['polish'])) {
+                $basicData['pesel'] = $profile['nationalidcode']['polish'];
+            }
 
             $data['basic_data'] = $basicData; // always add, at least data_source is always set
 
