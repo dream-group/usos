@@ -34,7 +34,6 @@ class IRKUser implements \JsonSerializable
             'phone'         => $applicant->phone,
             'citizenship'   => $applicant->citizenship,
             'accepted_data' => 'T', // leave as is
-//            '__raw_application' => $application ? $application->getRawData(true) : null, // todo: remove debug data
         ];
 
         if ($application) {
@@ -79,8 +78,27 @@ class IRKUser implements \JsonSerializable
                 $contactData['official_post_code'] = $contact['address']['postalcode'];
             }
 
+            // city can be in two fields
+
+            $city = [];
+
             if (isset($contact['address']['municipality'])) {
-                $contactData['official_city'] = $contact['address']['municipality'];
+                $city []= $contact['address']['municipality'];
+            }
+
+            if (isset($contact['address']['city'])) {
+                $city []= $contact['address']['city'];
+            }
+
+            if (count($city) > 0) {
+                $contactData['official_city'] = implode(', ', $city);
+            }
+
+            if (isset($contact['address']['street'])) {
+                // supposed to be street but send the whole street address
+                // we're trying not to guess the structure in the unstructured fields
+                // but still send all possible data
+                $contactData['official_street'] = $contact['address']['street'];
             }
 
             $contactData['modification_date'] = $application->revised; // first time, in contact data
