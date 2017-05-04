@@ -131,7 +131,9 @@ class IRKUser implements \JsonSerializable
                 $additionalData['country_of_birth'] = $profile['birth']['country'];
             }
 
-            $data['modification_data'] = $application->revised; // again, in root
+            $data['additional_data'] = $additionalData;
+
+            $data['modification_date'] = $application->revised; // again, in root
         }
 
         return $data;
