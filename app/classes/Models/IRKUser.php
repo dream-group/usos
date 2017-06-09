@@ -43,10 +43,10 @@ class IRKUser implements \JsonSerializable
             'cas_password_overwrite'    => false,
 
             // all main nodes
-            'basic_data'        => [],
-            'contact_data'      => [],
-            'additional_data'   => [],
-            'education_data'    => [],
+            'basic_data'        => new \ArrayObject(),
+            'contact_data'      => new \ArrayObject(),
+            'additional_data'   => new \ArrayObject(),
+            'education_data'    => new \ArrayObject(),
         ];
 
         if ($application) {
