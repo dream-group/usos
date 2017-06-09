@@ -33,7 +33,20 @@ class IRKUser implements \JsonSerializable
             'name'          => $applicant->name, // DA structure is the same as IRK
             'phone'         => $applicant->phone,
             'citizenship'   => $applicant->citizenship,
-            'accepted_data' => 'T', // leave as is
+
+            // fields that we ignore
+            'photo'             => null,
+            'photo_permission'  => null,
+            'password'          => null,
+            'index_number'      => null,
+            'accepted_data'     => 'T',
+            'cas_password_overwrite'    => false,
+
+            // all main nodes
+            'basic_data'        => [],
+            'contact_data'      => [],
+            'additional_data'   => [],
+            'education_data'    => [],
         ];
 
         if ($application) {
