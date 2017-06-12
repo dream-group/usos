@@ -37,7 +37,7 @@ class IRKUser implements \JsonSerializable
             // fields that we ignore
             'photo'             => null,
             'photo_permission'  => null,
-            'password'          => null,
+            'password'          => 'irk1$$00000000000000000000000000000000', // definitely no one's password
             'index_number'      => null,
             'accepted_data'     => 'T',
             'cas_password_overwrite'    => false,
