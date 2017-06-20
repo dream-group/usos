@@ -116,6 +116,12 @@ class IRKUser implements \JsonSerializable
                 $contactData['official_street'] = $contact['address']['street'];
             }
 
+            if (isset($contact['address']['type'])) {
+                // address type can be C (City / Town) or R (Village / Rural area)
+                // official_city_is_city expects T for city and N for village
+                $contactData['official_city_is_city'] = $contact['address']['type'] === 'C' ? 'T' : 'N';
+            }
+
             $contactData['modification_date'] = $application->revised; // first time, in contact data
 
             $data['contact_data'] = $contactData;
