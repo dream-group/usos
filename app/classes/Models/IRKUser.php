@@ -23,8 +23,14 @@ class IRKUser implements \JsonSerializable
         $application = null;
 
         if (($applications = $applicant->applications->toArray())) {
-            /** @var Application $application */
-            $application = end($applications);
+            foreach (array_reverse($applications) as $a) {
+                /** @var Application $a */
+
+                if ($a->status === Application::STATUS_ACCEPTED) {
+                    $application = $a;
+                    break;
+                }
+            }
         }
 
         $data = [
