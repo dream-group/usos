@@ -11,7 +11,7 @@
     "require": {
         "dream-group/dream-apply-sdk":  "dev-master",
         "league/uri-schemes":           "^1.0",
-        "silex/silex":                  "^2.0",
+        "silex/silex":                  "^2.2",
 
         "php": ">= 7.1"
     },
