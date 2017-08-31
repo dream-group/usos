@@ -19,7 +19,12 @@ class ApplicantsController extends Controller
 
         $client = $this->app['factory.dreamapply.api']->get($host, $request);
 
-        $email = $request->get('email', 'jmd@mimuw.edu.pl'); // TODO: remove default, throw exception if no email
+        $email = $request->get('email');
+
+        if (!$email) {
+            throw new ServiceException('Request must contain "email" field', Response::HTTP_BAD_REQUEST);
+        }
+
         // TODO: also filters by PESEL(?) and Surname
 
         $applicants = $client->applicants(['byEmails' => $email]);
@@ -53,7 +58,7 @@ class ApplicantsController extends Controller
         try {
             $applicant = $client->applicants[$applicantId];
         } catch (ItemNotFoundException $e) {
-            throw new ServiceException('Applicant not found', 404);
+            throw new ServiceException('Applicant not found', Response::HTTP_NOT_FOUND);
         }
 
         $irkUser = new IRKUser($applicant, $applicantId);
