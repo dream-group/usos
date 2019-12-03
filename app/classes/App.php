@@ -9,7 +9,6 @@ use Dream\USOS\Debug\DumpRequest;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\Provider\ServiceControllerServiceProvider;
-use Sorien\Provider\PimpleDumpProvider;
 
 class App extends Application
 {
@@ -40,7 +39,7 @@ class App extends Application
 
         if ($this['debug']) {
             // dump container for IDE completion
-            $this->register(new PimpleDumpProvider());
+//            $this->register(new PimpleDumpProvider());
         }
     }
 

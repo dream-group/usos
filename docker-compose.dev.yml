@@ -6,17 +6,19 @@ services:
       context: ./docker/web
       dockerfile: Dockerfile.dev
     ports:
-    - '80:80'
+      - '80:80'
     volumes:
-    - .:/var/www/html
-    - ./log:/var/log/nginx
+      - .:/var/www/html
+      - ./log:/var/log/nginx
     links:
-    - fpm
+      - fpm
   fpm:
     build:
       context: ./docker/fpm
       dockerfile: Dockerfile.dev
     volumes:
-    - .:/var/www/html
-    - ./log:/var/log/php-fpm
-    - /tmp:/tmp
+      - .:/var/www/html
+      - ./log:/var/log/php-fpm
+      - /tmp:/tmp
+    environment:
+      - APP_ENV=development

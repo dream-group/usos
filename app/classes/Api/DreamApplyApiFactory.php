@@ -4,7 +4,7 @@ namespace Dream\USOS\Api;
 
 use Dream\DreamApply\Client\Client;
 use Dream\USOS\Exceptions\ServiceException;
-use League\Uri\Schemes\Http;
+use League\Uri\Http;
 use Symfony\Component\HttpFoundation\Request;
 
 class DreamApplyApiFactory

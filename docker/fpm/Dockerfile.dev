@@ -6,5 +6,3 @@ RUN \
     apk --no-cache add icu-dev && \
     docker-php-ext-install intl && \
     apk del icu-dev
-
-ENV APP_ENV=development

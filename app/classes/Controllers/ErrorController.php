@@ -16,8 +16,10 @@ class ErrorController extends Controller
             'message'   => Response::$statusTexts[$code] ?? 'Unknown error'
         ];
 
-        if ($exception instanceof ServiceException || // this service exception
-            $exception instanceof HttpFailResponseException) { // Dream SDK exception
+        if (
+            $exception instanceof ServiceException || // this service exception
+            $exception instanceof HttpFailResponseException // Dream SDK exception
+        ) {
             $response['message'] = $exception->getMessage();
 
             $code = $exception->getCode();

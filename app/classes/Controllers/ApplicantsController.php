@@ -34,7 +34,7 @@ class ApplicantsController extends Controller
         foreach ($applicants as $id => $applicant) {
             /** @var Applicant $applicant */
 
-            $users []= new IRKUser($applicant, $id);
+            $users[] = new IRKUser($applicant, $id);
         }
 
         $response = [

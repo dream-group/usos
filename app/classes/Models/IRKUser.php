@@ -104,11 +104,11 @@ class IRKUser implements \JsonSerializable
             $city = [];
 
             if (isset($contact['address']['municipality'])) {
-                $city []= $contact['address']['municipality'];
+                $city[] = $contact['address']['municipality'];
             }
 
             if (isset($contact['address']['city'])) {
-                $city []= $contact['address']['city'];
+                $city[] = $contact['address']['city'];
             }
 
             if (count($city) > 0) {

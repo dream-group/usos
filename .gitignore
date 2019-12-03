@@ -1,6 +1,7 @@
 # IDE
 /.idea
 /pimple.json
+/docker-compose.yml
 
 # composer
 /vendor
