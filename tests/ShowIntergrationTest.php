@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ShowIntergrationTest extends TestCase
 {
-    public function testSearch(): void
+    public function testShow(): void
     {
         $app = new Silex();
         $app['factory.dreamapply.api'] = new MockFactory();

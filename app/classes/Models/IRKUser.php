@@ -7,7 +7,7 @@ namespace Dream\USOS\Models;
 use Dream\DreamApply\Client\Models\Applicant;
 use Dream\DreamApply\Client\Models\Application;
 
-class IRKUser implements \JsonSerializable
+final class IRKUser implements \JsonSerializable
 {
     private $id;
     private $applicant;

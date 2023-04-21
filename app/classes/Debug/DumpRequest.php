@@ -6,7 +6,7 @@ namespace Dream\USOS\Debug;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-class DumpRequest
+final class DumpRequest
 {
     /** @var string */
     private $path;

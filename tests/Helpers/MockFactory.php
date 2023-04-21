@@ -3,8 +3,10 @@
 namespace Dream\USOS\Tests\Helpers;
 
 use Dream\DreamApply\Client\Client;
+use Dream\USOS\Api\DreamApplyClientFactoryInterface;
+use Slim\Http\ServerRequest;
 
-class MockFactory
+class MockFactory implements DreamApplyClientFactoryInterface
 {
     /**
      * @var Client
@@ -22,7 +24,7 @@ class MockFactory
     /**
      * Fake factory
      */
-    public function get()
+    public function build(string $host, ServerRequest $request): Client
     {
         return $this->client;
     }
