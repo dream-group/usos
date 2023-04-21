@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Dream\USOS\Api;
 
 use Dream\DreamApply\Client\Client;
-use Dream\USOS\Exceptions\ServiceException;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Http\Factory\DecoratedUriFactory;
 use Slim\Http\ServerRequest;
@@ -23,7 +22,7 @@ final class DreamApplyClientFactory implements DreamApplyClientFactoryInterface
     public function build(string $host, ServerRequest $request): Client
     {
         if (checkdnsrr($host, 'a') === false && checkdnsrr($host, 'aaaa') === false) {
-            throw new ServiceException("Unknown host: $host", 400);
+            throw new HttpBadRequestException($request, "Unknown host: $host");
         }
 
         $endpoint = $this->uriFactory->createUri()
