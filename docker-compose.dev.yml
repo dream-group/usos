@@ -22,3 +22,5 @@ services:
       - /tmp:/tmp
     environment:
       - APP_ENV=development
+    extra_hosts:
+      - test-shard:host-gateway
