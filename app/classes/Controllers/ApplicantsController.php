@@ -9,14 +9,11 @@ use Dream\DreamApply\Client\Models\Applicant;
 use Dream\USOS\Api\DreamApplyClientFactoryInterface;
 use Dream\USOS\Debug\DumpRequest;
 use Dream\USOS\Env;
-use Dream\USOS\Exceptions\ServiceException;
 use Dream\USOS\Models\IRKUser;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class ApplicantsController
 {
@@ -62,22 +59,29 @@ class ApplicantsController
         return $response->withJson($responseJson);
     }
 
-    public function show(Request $request, string $host, int $applicantId)
-    {
-        if ($this->app['debug']) {
-            $this->app['debug.dump_request']->dumpRequest();
+    public function show(
+        ServerRequest $request,
+        Response $response,
+        string $host,
+        int $applicantId,
+        DreamApplyClientFactoryInterface $clientFactory,
+        Env $env,
+        DumpRequest $dumpRequest
+    ) {
+        if ($env->isDebug()) {
+            $dumpRequest->dumpRequest($request);
         }
 
-        $client = $this->app['factory.dreamapply.api']->get($host, $request);
+        $client = $clientFactory->build($host, $request);
 
         try {
             $applicant = $client->applicants[$applicantId];
         } catch (ItemNotFoundException $e) {
-            throw new ServiceException('Applicant not found', SymfonyResponse::HTTP_NOT_FOUND);
+            throw new HttpBadRequestException($request, 'Applicant not found');
         }
 
         $irkUser = new IRKUser($applicant, $applicantId);
 
-        return $this->app->json($irkUser);
+        return $response->withJson($irkUser);
     }
 }
