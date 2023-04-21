@@ -2,7 +2,9 @@
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Slim\Http\Factory\DecoratedResponseFactory;
+use Slim\Http\Factory\DecoratedUriFactory;
 
 use function DI\create;
 use function DI\get;
@@ -14,4 +16,8 @@ return [
     // response
     DecoratedResponseFactory::class => create()->constructor(get(Psr17Factory::class), get(Psr17Factory::class)),
     ResponseFactoryInterface::class => get(DecoratedResponseFactory::class),
+
+    // uri
+    DecoratedUriFactory::class => create()->constructor(get(Psr17Factory::class)),
+    UriFactoryInterface::class => get(DecoratedUriFactory::class),
 ];

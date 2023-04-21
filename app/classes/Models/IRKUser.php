@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dream\USOS\Models;
 
 use Dream\DreamApply\Client\Models\Applicant;

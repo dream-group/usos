@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Dream\USOS\Api;
+
+use Dream\DreamApply\Client\Client;
+use Dream\USOS\Exceptions\ServiceException;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Http\Factory\DecoratedUriFactory;
+use Slim\Http\ServerRequest;
+
+class DreamApplyClientFactory
+{
+    /** @var DecoratedUriFactory */
+    private $uriFactory;
+
+    public function __construct(DecoratedUriFactory $uriFactory)
+    {
+        $this->uriFactory = $uriFactory;
+    }
+
+    public function get(string $host, ServerRequest $request): Client
+    {
+        if (checkdnsrr($host, 'a') === false && checkdnsrr($host, 'aaaa') === false) {
+            throw new ServiceException("Unknown host: $host", 400);
+        }
+
+        $endpoint = $this->uriFactory->createUri()
+            ->withScheme('https')
+            ->withHost($host)
+            ->withPath('/api/')
+        ;
+
+        $auth = $request->getHeaderLine('authorization');
+
+        if (preg_match('/token\s+(.+)/i', $auth, $matches) === 0) {
+            throw new HttpBadRequestException($request, "Invalid auth header: '$auth'");
+        }
+
+        $token = $matches[1];
+
+        return new Client(strval($endpoint), $token);
+    }
+}
