@@ -35,6 +35,33 @@ class MockHttpHelper
             ]];
         }
 
+        if ($url === 'applicants/2' && $query === []) {
+            return [
+                'id' => 2,
+                'type' => 'Natural',
+                'registered' => '2020-01-01T20:00:00+00:00',
+                'name' =>
+                    [
+                        'full' => 'Damo of Atarneus',
+                        'given' => 'Damo',
+                        'middle' => null,
+                        'family' => 'of Atarneus',
+                    ],
+                'email' => 'damo.of.atarneus@example.com',
+                'phone' => '+372 123456789',
+                'reference' => null,
+                'citizenship' => 'GB',
+                'applications' => '/api/v3/applicants/2/applications',
+                'trackers' => '/api/v3/applicants/2/trackers',
+                'photo' => '/api/v3/applicants/2/photo',
+                'documents' => '/api/v3/applicants/2/documents',
+                'studyplans' => '/api/v3/applicants/2/studyplans',
+                'consents' => '/api/v3/applicants/2/consents',
+                'invoices' => '/api/v3/applicants/2/invoices',
+                'wishes' => '/api/v3/applicants/2/wishes',
+            ];
+        }
+
         if ($url === '/api/v3/applicants/2/applications' && $query === []) {
             return [2 => [
                 'id' => 2,
