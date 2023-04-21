@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;

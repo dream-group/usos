@@ -15,7 +15,7 @@ $app->group('/{host}', function (RouteCollectorProxy $host) {
     $host->group('/api', function (RouteCollectorProxy $api) {
         $api->group('/applicants', function (RouteCollectorProxy $applicants) {
             $applicants->get('/', [ApplicantsController::class, 'search']);
-            $applicants->get('{applicantId:\d+}/', [ApplicantsController::class, 'show']);
+            $applicants->get('/{applicantId:\d+}/', [ApplicantsController::class, 'show']);
         });
     });
 });

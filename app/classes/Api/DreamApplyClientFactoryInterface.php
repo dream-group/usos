@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dream\USOS\Api;
 
 use Dream\DreamApply\Client\Client;
