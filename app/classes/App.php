@@ -4,7 +4,7 @@ namespace Dream\USOS;
 
 use Dream\USOS\Api\DreamApplyApiFactory;
 use Dream\USOS\Controllers\ApplicantsController;
-use Dream\USOS\Controllers\ErrorController;
+use Dream\USOS\Middleware\ErrorMiddleware;
 use Dream\USOS\Debug\DumpRequest;
 use Silex\Application;
 use Silex\ControllerCollection;
