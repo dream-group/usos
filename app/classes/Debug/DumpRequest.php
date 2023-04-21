@@ -22,7 +22,7 @@ final class DumpRequest
 
         ob_start();
 
-        var_dump($request->getBody());
+        var_dump(strval($request->getBody()));
         var_dump($request->getQueryParams());
         var_dump($request->getHeaders());
 
