@@ -6,7 +6,7 @@ namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
 use Dream\DreamApply\Client\Models\Applicant;
-use Dream\USOS\Api\DreamApplyClientFactory;
+use Dream\USOS\Api\DreamApplyClientFactoryInterface;
 use Dream\USOS\Debug\DumpRequest;
 use Dream\USOS\Env;
 use Dream\USOS\Exceptions\ServiceException;
@@ -24,7 +24,7 @@ class ApplicantsController
         ServerRequest $request,
         Response $response,
         string $host,
-        DreamApplyClientFactory $clientFactory,
+        DreamApplyClientFactoryInterface $clientFactory,
         Env $env,
         DumpRequest $dumpRequest
     ): ResponseInterface {
@@ -32,7 +32,7 @@ class ApplicantsController
             $dumpRequest->dumpRequest($request);
         }
 
-        $client = $clientFactory->get($host, $request);
+        $client = $clientFactory->build($host, $request);
 
         $email = $request->getQueryParam('email');
 

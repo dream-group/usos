@@ -10,7 +10,7 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Http\Factory\DecoratedUriFactory;
 use Slim\Http\ServerRequest;
 
-class DreamApplyClientFactory
+final class DreamApplyClientFactory implements DreamApplyClientFactoryInterface
 {
     /** @var DecoratedUriFactory */
     private $uriFactory;
@@ -20,7 +20,7 @@ class DreamApplyClientFactory
         $this->uriFactory = $uriFactory;
     }
 
-    public function get(string $host, ServerRequest $request): Client
+    public function build(string $host, ServerRequest $request): Client
     {
         if (checkdnsrr($host, 'a') === false && checkdnsrr($host, 'aaaa') === false) {
             throw new ServiceException("Unknown host: $host", 400);

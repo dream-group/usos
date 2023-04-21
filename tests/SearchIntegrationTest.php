@@ -4,28 +4,38 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Tests;
 
+use DI\Container;
 use Dream\USOS\Controllers\ApplicantsController;
+use Dream\USOS\Env;
 use Dream\USOS\Tests\Helpers\MockFactory;
 use PHPUnit\Framework\TestCase;
-use Silex\Application as Silex;
-use Symfony\Component\HttpFoundation\Request;
+use Psr\Http\Message\ResponseInterface;
+use Slim\Http\Factory\DecoratedResponseFactory;
+use Slim\Http\Factory\DecoratedServerRequestFactory;
 
 class SearchIntegrationTest extends TestCase
 {
     public function testSearch(): void
     {
-        $app = new Silex();
-        $app['factory.dreamapply.api'] = new MockFactory();
+        /** @var Container $container */
+        $container = require __DIR__ . '/../app/services.php';
 
-        $c = new ApplicantsController($app);
+        $request = $container->get(DecoratedServerRequestFactory::class)
+            ->createServerRequest('get', 'http://localhost')
+            ->withQueryParams([
+                'email' => 'damo.of.atarneus@example.com',
+            ]);
 
-        $request = new Request([
-            'email' => 'damo.of.atarneus@example.com',
+        /** @var ResponseInterface $response */
+        $response = $container->call([new ApplicantsController(), 'search'], [
+            'request' => $request,
+            'response' => $container->get(DecoratedResponseFactory::class)->createResponse(),
+            'host' => 'localhost',
+            'clientFactory' => new MockFactory(),
+            'env' => new Env('test'), // do not produce dev garbage
         ]);
 
-        $response = $c->search($request, 'localhost');
-
-        $result = json_decode($response->getContent(), true);
+        $result = json_decode(strval($response->getBody()), true);
 
         self::assertEquals([
             'count' => 1,
