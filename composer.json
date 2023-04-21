@@ -1,11 +1,9 @@
 {
     "name": "dream/usos",
     "type": "project",
-    "autoload": {
-        "psr-4": {
-            "Dream\\USOS\\": "app/classes"
-        }
-    },
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/dream-group/dream-apply-sdk"}
+    ],
     "config": {
         "sort-packages": true,
         "allow-plugins": {
@@ -15,13 +13,15 @@
             "php": "7.2.5"
         }
     },
-    "repositories": [
-        {"type": "vcs", "url": "https://github.com/dream-group/dream-apply-sdk"}
-    ],
+    "autoload": {
+        "psr-4": {
+            "Dream\\USOS\\": "app/classes"
+        }
+    },
     "require": {
         "php": ">= 7.2.5",
         "ext-json": "*",
-        "dream-group/dream-apply-sdk": "dev-master",
+        "dream-group/dream-apply-sdk": "^1",
         "league/uri-schemes": "^1.2",
         "silex/silex": "^2.3"
     },
