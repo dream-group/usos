@@ -9,4 +9,5 @@
 # logs
 /log
 
-
+# phpunit
+/.phpunit.result.cache
