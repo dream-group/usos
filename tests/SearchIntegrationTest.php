@@ -23,7 +23,7 @@ class SearchIntegrationTest extends TestCase
             'email' => 'damo.of.atarneus@example.com',
         ]);
 
-        $response = $c->index($request, 'localhost');
+        $response = $c->search($request, 'localhost');
 
         $result = json_decode($response->getContent(), true);
 

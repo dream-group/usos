@@ -1,28 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dream\USOS\Controllers;
 
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
 use Dream\DreamApply\Client\Models\Applicant;
+use Dream\USOS\Api\DreamApplyClientFactory;
+use Dream\USOS\Debug\DumpRequest;
+use Dream\USOS\Env;
 use Dream\USOS\Exceptions\ServiceException;
 use Dream\USOS\Models\IRKUser;
+use Psr\Http\Message\ResponseInterface;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class ApplicantsController extends Controller
+class ApplicantsController
 {
-    public function index(Request $request, string $host): Response
-    {
-        if ($this->app['debug']) {
-            $this->app['debug.dump_request']->dumpRequest();
+    public function search(
+        ServerRequest $request,
+        Response $response,
+        string $host,
+        DreamApplyClientFactory $clientFactory,
+        Env $env,
+        DumpRequest $dumpRequest
+    ): ResponseInterface {
+        if ($env->isDebug()) {
+            $dumpRequest->dumpRequest($request);
         }
 
-        $client = $this->app['factory.dreamapply.api']->get($host, $request);
+        $client = $clientFactory->get($host, $request);
 
-        $email = $request->get('email');
+        $email = $request->getQueryParam('email');
 
         if (!$email) {
-            throw new ServiceException('Request must contain "email" field', Response::HTTP_BAD_REQUEST);
+            throw new HttpBadRequestException($request, 'Request must contain "email" field');
         }
 
         // TODO: also filters by PESEL(?) and Surname
@@ -37,14 +52,14 @@ class ApplicantsController extends Controller
             $users[] = new IRKUser($applicant, $id);
         }
 
-        $response = [
+        $responseJson = [
             'count'     => count($users),
             'next'      => null,
             'previous'  => null,
             'results'   => $users,
         ];
 
-        return $this->app->json($response);
+        return $response->withJson($responseJson);
     }
 
     public function show(Request $request, string $host, int $applicantId)
@@ -58,7 +73,7 @@ class ApplicantsController extends Controller
         try {
             $applicant = $client->applicants[$applicantId];
         } catch (ItemNotFoundException $e) {
-            throw new ServiceException('Applicant not found', Response::HTTP_NOT_FOUND);
+            throw new ServiceException('Applicant not found', SymfonyResponse::HTTP_NOT_FOUND);
         }
 
         $irkUser = new IRKUser($applicant, $applicantId);

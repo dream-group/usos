@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dream\USOS\Debug;
+
+use Psr\Http\Message\ServerRequestInterface;
 
 class DumpRequest
 {
+    /** @var string */
     private $path;
 
     public function __construct(string $path)
@@ -11,15 +16,15 @@ class DumpRequest
         $this->path = $path;
     }
 
-    public function dumpRequest(): void
+    public function dumpRequest(ServerRequestInterface $request): void
     {
         $file = $this->path . '/' . uniqid('request_') . '.txt';
 
         ob_start();
 
-        var_dump($_GET);
-        var_dump($_POST);
-        var_dump($_SERVER);
+        var_dump($request->getBody());
+        var_dump($request->getQueryParams());
+        var_dump($request->getHeaders());
 
         file_put_contents($file, ob_get_clean());
     }
