@@ -6,7 +6,7 @@ services:
       context: ./docker/web
       dockerfile: Dockerfile.dev
     ports:
-      - '80:80'
+      - '127.0.0.1:8053:80'
     volumes:
       - .:/var/www/html
       - ./log:/var/log/nginx
