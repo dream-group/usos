@@ -1,13 +1,14 @@
 <?php
 
-namespace Dream\USOS\Controllers;
+namespace Dream\USOS\Middleware;
 
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\USOS\Controllers\Controller;
 use Dream\USOS\Exceptions\ServiceException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ErrorController extends Controller
+class ErrorMiddleware extends Controller
 {
     public function __invoke(\Exception $exception, Request $request, int $code): Response
     {
