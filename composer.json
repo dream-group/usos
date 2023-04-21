@@ -18,6 +18,11 @@
             "Dream\\USOS\\": "app/classes"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dream\\USOS\\Tests\\": "tests"
+        }
+    },
     "require": {
         "php": ">= 7.2.5",
         "ext-json": "*",
@@ -28,6 +33,7 @@
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "*",
         "phpcompatibility/php-compatibility": "*",
+        "phpunit/phpunit": "^8.5",
         "psy/psysh": "*",
         "squizlabs/php_codesniffer": "*"
     }

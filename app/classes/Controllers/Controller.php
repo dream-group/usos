@@ -2,13 +2,13 @@
 
 namespace Dream\USOS\Controllers;
 
-use Dream\USOS\App;
+use Silex\Application;
 
 class Controller
 {
     protected $app;
 
-    public function __construct(App $app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }
