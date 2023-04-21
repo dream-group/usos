@@ -12,14 +12,14 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "7.1.3"
+            "php": "7.2.5"
         }
     },
     "repositories": [
         {"type": "vcs", "url": "https://github.com/dream-group/dream-apply-sdk"}
     ],
     "require": {
-        "php": ">= 7.1.3",
+        "php": ">= 7.2.5",
         "ext-json": "*",
         "dream-group/dream-apply-sdk": "dev-master",
         "league/uri-schemes": "^1.2",
