@@ -2,7 +2,7 @@
 
 namespace Dream\USOS\Tests\Helpers;
 
-use Dream\DreamApply\Client\Client;
+use Dream\Apply\Client\Client;
 use Dream\USOS\Api\DreamApplyClientFactoryInterface;
 use Slim\Http\ServerRequest;
 

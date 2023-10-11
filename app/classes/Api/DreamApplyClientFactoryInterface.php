@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Api;
 
-use Dream\DreamApply\Client\Client;
+use Dream\Apply\Client\Client;
 use Slim\Http\ServerRequest;
 
 interface DreamApplyClientFactoryInterface

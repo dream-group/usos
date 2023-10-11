@@ -39,6 +39,7 @@ final class IRKUser implements \JsonSerializable
             'id'            => $this->id,
             'email'         => $applicant->email,
             'name'          => [
+                'full'          => $applicant->name->full,
                 'given'         => $applicant->name->given,
                 'middle'        => $applicant->name->middle,
                 'family'        => $applicant->name->family,
