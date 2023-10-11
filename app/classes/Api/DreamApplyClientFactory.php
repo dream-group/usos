@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Api;
 
-use Dream\DreamApply\Client\Client;
+use Dream\Apply\Client\Client;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Http\Factory\DecoratedUriFactory;
 use Slim\Http\ServerRequest;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Controllers;
 
-use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
-use Dream\DreamApply\Client\Models\Applicant;
+use Dream\Apply\Client\Exceptions\ItemNotFoundException;
+use Dream\Apply\Client\Models\Applicant;
 use Dream\USOS\Api\DreamApplyClientFactoryInterface;
 use Dream\USOS\Debug\DumpRequest;
 use Dream\USOS\Env;
@@ -39,7 +39,7 @@ class ApplicantsController
 
         // TODO: also filters by PESEL(?) and Surname
 
-        $applicants = $client->applicants(['byEmails' => $email]);
+        $applicants = $client->getApplicants(['byEmails' => $email]);
 
         $users = [];
 
@@ -75,7 +75,7 @@ class ApplicantsController
         $client = $clientFactory->build($host, $request);
 
         try {
-            $applicant = $client->applicants[$applicantId];
+            $applicant = $client->getApplicants()->get($applicantId);
         } catch (ItemNotFoundException $e) {
             throw new HttpBadRequestException($request, 'Applicant not found');
         }

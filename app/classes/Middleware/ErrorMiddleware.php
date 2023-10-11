@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Middleware;
 
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\USOS\Env;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

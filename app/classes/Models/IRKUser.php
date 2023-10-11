@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dream\USOS\Models;
 
-use Dream\DreamApply\Client\Models\Applicant;
-use Dream\DreamApply\Client\Models\Application;
+use Dream\Apply\Client\Models\Applicant;
+use Dream\Apply\Client\Models\Application;
 
 final class IRKUser implements \JsonSerializable
 {
@@ -38,7 +38,11 @@ final class IRKUser implements \JsonSerializable
         $data = [
             'id'            => $this->id,
             'email'         => $applicant->email,
-            'name'          => $applicant->name, // DA structure is the same as IRK
+            'name'          => [
+                'given'         => $applicant->name->given,
+                'middle'        => $applicant->name->middle,
+                'family'        => $applicant->name->family,
+            ],
             'phone'         => $applicant->phone,
             'citizenship'   => $applicant->citizenship,
 
