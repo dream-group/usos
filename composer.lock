@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e5adeb0940473be7bbee3385b014911",
+    "content-hash": "69869a3486393e5ddc2b7a97ca407149",
     "packages": [
         {
             "name": "dream-group/dream-apply-sdk",
-            "version": "2.0.1",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dream-group/dream-apply-sdk.git",
-                "reference": "8576418cf55b1fc1c5e82f048da69b4eb3b5aa58"
+                "reference": "69dd09ad8a8369a70bbfb77a4b09c9d9c03e27d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dream-group/dream-apply-sdk/zipball/8576418cf55b1fc1c5e82f048da69b4eb3b5aa58",
-                "reference": "8576418cf55b1fc1c5e82f048da69b4eb3b5aa58",
+                "url": "https://api.github.com/repos/dream-group/dream-apply-sdk/zipball/69dd09ad8a8369a70bbfb77a4b09c9d9c03e27d9",
+                "reference": "69dd09ad8a8369a70bbfb77a4b09c9d9c03e27d9",
                 "shasum": ""
             },
             "require": {
@@ -42,18 +42,19 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
                 "psr-4": {
                     "Dream\\Apply\\Client\\": [
                         "gen",
                         "src"
                     ]
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
+                }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "private"
+                "MIT"
             ],
             "authors": [
                 {
@@ -63,9 +64,9 @@
             ],
             "description": "Dream Apply SDK",
             "support": {
-                "source": "https://github.com/dream-group/dream-apply-sdk/tree/2.0.1"
+                "source": "https://github.com/dream-group/dream-apply-sdk/tree/3.0.1"
             },
-            "time": "2023-10-11T21:16:57+00:00"
+            "time": "2023-11-21T13:29:21+00:00"
         },
         {
             "name": "fig/http-message-util",
@@ -4324,5 +4325,5 @@
     "platform-overrides": {
         "php": "7.2.5"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

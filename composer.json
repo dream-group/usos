@@ -1,9 +1,6 @@
 {
     "name": "dream/usos",
     "type": "project",
-    "repositories": [
-        {"type": "vcs", "url": "https://github.com/dream-group/dream-apply-sdk"}
-    ],
     "config": {
         "sort-packages": true,
         "allow-plugins": {
